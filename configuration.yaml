@@ -1,0 +1,196 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 200
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+zone:
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 300
+
+
+ios:
+
+hue:
+  bridges:
+    - host: 10.0.1.2
+
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+sensor:
+  - platform: template
+    sensors:
+      secure_house:
+        friendly_name: "House Secure"
+        value_template: >-
+          {% if is_state("cover.garage_door_opener", "closed") and
+                is_state("lock.locked_7","locked") and
+                is_state("lock.locked_5","locked") -%}
+            secure
+          {%- else -%}
+            insecure
+          {%- endif %}
+      secure_office:
+        friendly_name: "Office Secure"
+        value_template: >-
+          {% if is_state("lock.locked_4","locked") -%}
+            secure
+          {%- else -%}
+            insecure
+          {%- endif %}
+      motion_walkway:
+        friendly_name: "Walkway Motion"
+        value_template: >-
+          false
+      motion_driveway:
+        friendly_name: "Driveway Motion"
+        value_template: >-
+          false
+      motion_backyard:
+        friendly_name: "Backyard Motion"
+        value_template: >-
+          false
+      gate:
+        friendly_name: "Gate"
+        value_template: >-
+          closed
+
+  - platform: darksky
+    api_key: !secret darksky_key
+    monitored_conditions:
+      - summary
+      - icon
+      - temperature
+      - apparent_temperature
+      - temperature_min
+      - temperature_max
+      - pressure
+      - humidity
+      - visibility
+      - wind_speed
+      - wind_bearing
+      - precip_probability
+      - precip_intensity
+      - precip_type
+
+  - platform: amcrest
+
+# Weather prediction
+  - platform: yr
+
+# Cert monitor:
+  - platform: command_line
+    name: SSL Cert Expiry
+    unit_of_measurement: days
+    scan_interval: 10800
+    command: !secret cert_check_command
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+shell_command:
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+zwave:
+  usb_path: /dev/ttyACM0
+  polling_interval: 30000
+ 
+amcrest:
+  - host: 10.0.1.203
+    name: driveway
+    username: !secret amcrest_driveway_username
+    password: !secret amcrest_driveway_password
+    sensors:
+      - motion_detector
+  - host: 10.0.1.206
+    name: liberty
+    username: !secret amcrest_liberty_username
+    password: !secret amcrest_liberty_password
+    sensors:
+      - motion_detector
+  - host: 10.0.1.207
+    name: walkway
+    username: !secret amcrest_walkway_username
+    password: !secret amcrest_walkway_password
+    sensors:
+      - motion_detector
+
+camera:
+  - platform: amcrest
+    name: Driveway
+
+
+cover:
+  - platform: myq
+    username: !secret myq_username
+    password: !secret myq_password
+    type: liftmaster
+
+climate:
+  - platform: honeywell
+    region: us
+    username: !secret honeywell_username 
+    password: !secret honeywell_password
+    scan_interval: 1200
+

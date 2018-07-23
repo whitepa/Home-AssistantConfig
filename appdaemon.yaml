@@ -1,0 +1,11 @@
+appdaemon:
+  threads: 10
+  disable_apps: 1
+  plugins:
+    HASS:
+      type: hass
+      ha_url: http://localhost:8123
+
+hadashboard:
+  dash_url: http://10.0.1.19:5050
+

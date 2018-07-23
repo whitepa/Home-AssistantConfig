@@ -1,0 +1,29 @@
+  garage_lights:
+    name: Garage Lights
+    entities:
+      - switch.switch
+      - switch.switch_2
+      - switch.switch_3
+      - switch.switch_4
+
+  floods:
+    name: Floodlights
+    entities:
+      - switch.switch_12
+      - switch.switch_13
+      - switch.switch_6
+      - switch.switch_8
+
+  barnlights:
+    name: Barn Lights
+    entities:
+      - switch.switch_5
+      - switch.switch_7
+      - switch.switch_9
+
+  sirens:
+    name: Sirens
+    entities:
+      - light.level_20
+      - light.level_21
+

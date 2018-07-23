@@ -1,0 +1,39 @@
+  - alias: 'Auto Renew SSL Cert'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.ssl_cert_expiry
+      below: 29
+    action:
+      service: shell_command.renew_ssl
+
+  - alias: 'Walkway Motion Notify'
+    trigger:
+      platform: state
+      entity_id: sensor.walkway_motion_detected
+      from: 'False'
+      to: 'True'
+    action:
+      service: notify.ios_philips_iphone
+      data:
+        title: "Motion on Walkway"
+        message: "Detected motion on walkway"
+        data:
+          push:
+            category: camera
+          entity_id:  camera.walkway
+
+  - alias: 'Walkway Motion Floodlights'
+    trigger:
+      platform: state
+      entity_id: sensor.walkway_motion_detected
+      from: 'False'
+      to: 'True'
+    action:
+      - service: switch.turn_on
+        entity_id: "switch.switch_6"
+      - delay: 2:00
+      - service: switch.turn_off
+        entity_id: "switch.switch_6"
+
+
+
