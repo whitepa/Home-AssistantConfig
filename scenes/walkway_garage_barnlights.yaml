@@ -1,0 +1,6 @@
+name: Barnlights On
+entities:
+  switch.walkway_barnlights:
+     state: on
+  switch.garage_barnlights:
+     state: on

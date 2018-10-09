@@ -35,5 +35,24 @@
       - service: switch.turn_off
         entity_id: "switch.switch_6"
 
+  - alias: "Barn Lights On 30 Minutes before Sunset"
+    trigger:
+      platform: sun
+      event: sunset
+      offset: "-00:30:00"
+    action:
+      service: scene.turn_on
+      entity_id: scene.barnlights_on
+
+
+  - alias: "Barn Lights Off 30 Minutes after Sunrise"
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: "+00:30:00"
+    action:
+      service: scene.turn_on
+      entity_id: scene.barnlights_off
+
 
 

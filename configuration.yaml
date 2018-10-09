@@ -19,6 +19,21 @@ zone:
     longitude: !secret longitude
     radius: 300
 
+recorder:
+  purge_keep_days: 14
+  db_url: mysql://hassuser:hass@localhost/hass_db?charset=utf8
+
+
+cloud:
+  alexa:
+    filter:
+      include_entities:
+        - light.level_7
+    entity_config:
+      light.level_7:
+        name: Island
+        description: Island Light
+
 
 ios:
 
@@ -61,6 +76,16 @@ conversation:
 # Enables support for tracking state changes over time
 history:
 
+#history_graph:
+#  gr1:
+#    name: Liberty Graph
+#    entities:
+#      - sensor.liberty_motion_detected
+#      - switch.switch_11
+#      - light.level_14
+#    hours_to_show: 240
+#    refresh: 60
+
 # View all events in a logbook
 logbook:
 
@@ -70,7 +95,50 @@ map:
 # Track the sun
 sun:
 
+binary_sensor:
+  - platform: mqtt
+    name: "Office Motion"
+    state_topic: "smartthings/Office Motion/motion"
+    payload_on: "active"
+    payload_off: "inactive"
+    device_class: "motion"
+
+  - platform: mqtt
+    name: "Laundry Closet Motion"
+    state_topic: "smartthings/Laundry Closet/motion"
+    payload_on: "active"
+    payload_off: "inactive"
+    device_class: "motion"
+
+  - platform: mqtt
+    name: "Master Bedroom Motion"
+    state_topic: "smartthings/Master Bedroom/motion"
+    payload_on: "active"
+    payload_off: "inactive"
+    device_class: "motion"
+
+
+
 sensor:
+  - platform: mqtt
+    name: "Laundry Closet Temperature"
+    state_topic: "smartthings/Laundry Closet/temperature"
+    unit_of_measurement: '°F'
+    device_class: "temperature"
+
+  - platform: mqtt
+    name: "Master Bedroom Temperature"
+    state_topic: "smartthings/Master Bedroom/temperature"
+    unit_of_measurement: '°F'
+    device_class: "temperature"
+
+  - platform: mqtt
+    name: "Office Temperature"
+    state_topic: "smartthings/Office Motion/temperature"
+    unit_of_measurement: '°F'
+    device_class: "temperature"
+
+
   - platform: template
     sensors:
       secure_house:
@@ -194,3 +262,10 @@ climate:
     password: !secret honeywell_password
     scan_interval: 1200
 
+mqtt:
+  broker: localhost
+  port: 1883
+  client_id: home-assistant-1
+  keepalive: 60
+
+scene: !include_dir_list scenes

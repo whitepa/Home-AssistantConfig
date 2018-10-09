@@ -17,9 +17,9 @@
   barnlights:
     name: Barn Lights
     entities:
-      - switch.switch_5
-      - switch.switch_7
-      - switch.switch_9
+      - switch.backyard_barnlights
+      - switch.garage_barnlights
+      - switch.walkway_barnlights
 
   sirens:
     name: Sirens
