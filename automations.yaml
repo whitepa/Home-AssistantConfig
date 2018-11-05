@@ -54,5 +54,29 @@
       service: scene.turn_on
       entity_id: scene.barnlights_off
 
+  - alias: "Bedroom Hallway On at 7AM"
+    trigger:
+      platform: time
+      at: '07:00:00'
+    action:
+        service: switch.turn_on
+        entity_id: light.bedroom_hallway
 
+  - alias: "Laundry Closet Light On With Motion"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.laundry_closet_motion
+      to: 'on'
+    action:
+    - service: switch.turn_on
+      entity_id: "switch.laundry"
+
+  - alias: "Laundry Closet Light Off"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.laundry_closet_motion
+      to: 'off'
+    action:
+    - service: switch.turn_off
+      entity_id: "switch.laundry"
 

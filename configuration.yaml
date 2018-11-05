@@ -105,7 +105,7 @@ binary_sensor:
 
   - platform: mqtt
     name: "Laundry Closet Motion"
-    state_topic: "smartthings/Laundry Closet/motion"
+    state_topic: "smartthings/Laundry/motion"
     payload_on: "active"
     payload_off: "inactive"
     device_class: "motion"
@@ -122,7 +122,7 @@ binary_sensor:
 sensor:
   - platform: mqtt
     name: "Laundry Closet Temperature"
-    state_topic: "smartthings/Laundry Closet/temperature"
+    state_topic: "smartthings/Laundry/temperature"
     unit_of_measurement: '°F'
     device_class: "temperature"
 
@@ -224,6 +224,9 @@ zwave:
   usb_path: /dev/ttyACM0
   polling_interval: 30000
  
+ffmpeg:
+  ffmpeg_bin: /usr/local/bin/ffmpeg
+
 amcrest:
   - host: 10.0.1.203
     name: driveway
@@ -245,9 +248,9 @@ amcrest:
       - motion_detector
 
 camera:
-  - platform: amcrest
-    name: Driveway
-
+#  - platform: ffmpeg
+#    input: rtsp://admin:acrules76@10.0.1.207:554/cam/realmonitor?channel=1&subtype=1
+#    name: Walkway2
 
 cover:
   - platform: myq
