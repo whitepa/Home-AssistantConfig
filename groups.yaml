@@ -1,18 +1,66 @@
-  garage_lights:
-    name: Garage Lights
+  default_view:
+    view: yes
+    icon: mdi:home
     entities:
-      - switch.switch
-      - switch.switch_2
-      - switch.switch_3
-      - switch.switch_4
+      - group.dogpoop
+      - group.walkway
+      - group.living_room
+      - group.kitchen
+      - group.liberty
+      - group.floods
+      - group.garage
+      - group.barnlights
+      - group.sirens
+      - group.master_bedroom
+      - group.office
+      - group.laundry
+      - group.mechanical_room
+
+  dogpoop:
+    name: Dog Poop
+    entities:
+      - switch.flood_upslope
+      - switch.flood_garage
+
+  liberty:
+    name: Liberty
+    entities:
+      - switch.liberty_closet
+      - light.liberty_bedroom
+      - camera.liberty
+
+  laundry:
+    name: Laundry
+    entities:
+      - switch.laundry
+      - switch.laundry_fan
+      - sensor.laundry_closet_temperature
+      - binary_sensor.laundry_closet_motion
+
+  mechanical_room:
+    name: Mechanical Room
+    entities:
+      - sensor.mechanical_room_temperature
+      - binary_sensor.mechanical_room_motion
+
+  garage:
+    name: Garage
+    entities:
+      - switch.garage_ne
+      - switch.garage_nw
+      - switch.garage_se
+      - switch.garage_sw
+      - binary_sensor.garage_motion
+      - sensor.garage_temperature
+      
 
   floods:
     name: Floodlights
     entities:
-      - switch.switch_12
-      - switch.switch_13
-      - switch.switch_6
-      - switch.switch_8
+      - switch.flood_upslope
+      - switch.flood_downslope
+      - switch.flood_garage
+      - switch.flood_backyard
 
   barnlights:
     name: Barn Lights
@@ -21,9 +69,45 @@
       - switch.garage_barnlights
       - switch.walkway_barnlights
 
-  sirens:
+sirens:
     name: Sirens
     entities:
-      - light.level_20
-      - light.level_21
+      - light.siren_foyer
+      - light.siren_garage
 
+  kitchen:
+    name: Kitchen
+    entities:
+      - light.kitchen_cans
+      - light.kitchen_island
+      - light.kitchen_nook_cans
+
+  living_room:
+    name: Living Room
+    entities:
+      - light.living_room_pendant
+      - light.living_room_cans
+
+  master_bedroom:
+    name: Master Bedroom
+    entities:
+      - light.master_bedroom_pendant
+      - light.master_closet_left
+      - switch.master_closet_right
+      - binary_sensor.master_bedroom_motion
+      - sensor.master_bedroom_temperature
+      
+  office:
+    name: Office
+    entities:
+      - light.office
+      - binary_sensor.office_motion
+      - sensor.office_temperature
+      - camera.driveway
+
+  walkway:
+    name: Walkway
+    entities:
+      - switch.walkway_barnlights
+      - sensor.walkway_motion_detected
+      - camera.walkway

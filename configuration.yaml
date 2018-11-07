@@ -169,8 +169,8 @@ sensor:
         friendly_name: "House Secure"
         value_template: >-
           {% if is_state("cover.garage_door_opener", "closed") and
-                is_state("lock.locked_7","locked") and
-                is_state("lock.locked_5","locked") -%}
+                is_state("lock.front_door","locked") and
+                is_state("lock.garage_foyer_door","locked") -%}
             secure
           {%- else -%}
             insecure
@@ -178,7 +178,7 @@ sensor:
       secure_office:
         friendly_name: "Office Secure"
         value_template: >-
-          {% if is_state("lock.locked_4","locked") -%}
+          {% if is_state("lock.garage_office_door","locked") -%}
             secure
           {%- else -%}
             insecure
