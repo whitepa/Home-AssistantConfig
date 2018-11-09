@@ -2,6 +2,7 @@
     view: yes
     icon: mdi:home
     entities:
+      - group.all_automations
       - group.dogpoop
       - group.walkway
       - group.living_room
@@ -15,6 +16,34 @@
       - group.office
       - group.laundry
       - group.mechanical_room
+
+  security:
+    view: yes
+    icon: mdi:lock
+    entities:
+      - group.security_status
+
+  auto:
+    view: yes
+    entities:
+      - group.automations
+
+  automations:
+    name: Automations
+    entities:
+      - automation.barn_lights_off_30_minutes_after_sunrise
+      - automation.barn_lights_on_30_minutes_after_sunset
+      - automation.bedroom_hallway_on_at_7am
+      - automation.laundry_closet_light_off
+      - automation.laundry_closet_light_on_with_motion
+      - automation.walkway_motion_floodlights
+      - automation.walkway_motion_notify
+
+  security_status:
+    name: Status
+    entities:
+      - sensor.secure_house
+      - sensor.secure_office
 
   dogpoop:
     name: Dog Poop
@@ -69,7 +98,7 @@
       - switch.garage_barnlights
       - switch.walkway_barnlights
 
-sirens:
+  sirens:
     name: Sirens
     entities:
       - light.siren_foyer
@@ -111,3 +140,4 @@ sirens:
       - switch.walkway_barnlights
       - sensor.walkway_motion_detected
       - camera.walkway
+

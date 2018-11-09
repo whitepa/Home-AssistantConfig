@@ -24,8 +24,9 @@ recorder:
   db_url: mysql://hassuser:hass@localhost/hass_db?charset=utf8
 
 
-cloud:
-  alexa:
+#cloud:
+#  alexa:
+#
 #    filter:
 #      include_entities:
 #        - light.level_7
@@ -233,9 +234,6 @@ sensor:
 # Text to speech
 tts:
   - platform: google
-
-# Cloud
-cloud:
 
 shell_command:
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
