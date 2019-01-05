@@ -23,8 +23,14 @@ recorder:
   purge_keep_days: 14
   db_url: mysql://hassuser:hass@localhost/hass_db?charset=utf8
 
+logger:
+  default: info
+  logs:
+    homeassistant.components.media_player: debug
+    homeassistant.components.tts: debug
 
-#cloud:
+cloud:
+
 #  alexa:
 #
 #    filter:
@@ -35,6 +41,8 @@ recorder:
 #        name: Island
 #        description: Island Light
 
+tts:
+  - platform: google
 
 ios:
 
@@ -163,6 +171,36 @@ sensor:
     unit_of_measurement: '°F'
     device_class: "temperature"
 
+  - platform: mqtt
+    name: "Laundry Closet Battery"
+    state_topic: "smartthings/Laundry/battery"
+    unit_of_measurement: '%'
+    device_class: "battery"
+
+  - platform: mqtt
+    name: "Master Bedroom Battery"
+    state_topic: "smartthings/Master Bedroom/battery"
+    unit_of_measurement: '%'
+    device_class: "battery"
+
+  - platform: mqtt
+    name: "Office Battery"
+    state_topic: "smartthings/Office Motion/battery"
+    unit_of_measurement: '%'
+    device_class: "battery"
+
+  - platform: mqtt
+    name: "Garage Battery"
+    state_topic: "smartthings/Garage/battery"
+    unit_of_measurement: '%'
+    device_class: "battery"
+
+  - platform: mqtt
+    name: "Mechanical Room Battery"
+    state_topic: "smartthings/Mechanical Room/battery"
+    unit_of_measurement: '%'
+    device_class: "battery"
+
 
   - platform: template
     sensors:
@@ -230,10 +268,6 @@ sensor:
     unit_of_measurement: days
     scan_interval: 10800
     command: !secret cert_check_command
-
-# Text to speech
-tts:
-  - platform: google
 
 shell_command:
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01

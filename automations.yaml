@@ -1,82 +1,141 @@
-  - alias: 'Auto Renew SSL Cert'
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.ssl_cert_expiry
-      below: 29
-    action:
-      service: shell_command.renew_ssl
-
-  - alias: 'Walkway Motion Notify'
-    trigger:
-      platform: state
-      entity_id: sensor.walkway_motion_detected
-      from: 'False'
-      to: 'True'
-    action:
-      service: notify.ios_philips_iphone
+- id: auto_renew
+  alias: Auto Renew SSL Cert
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+    service: shell_command.renew_ssl
+- id: walkway_motion_notify
+  alias: Walkway Motion Notify
+  trigger:
+    platform: state
+    entity_id: sensor.walkway_motion_detected
+    from: 'False'
+    to: 'True'
+  action:
+    service: notify.ios_philips_iphone
+    data:
+      title: Motion on Walkway
+      message: Detected motion on walkway
       data:
-        title: "Motion on Walkway"
-        message: "Detected motion on walkway"
-        data:
-          push:
-            category: camera
-          entity_id:  camera.walkway
+        push:
+          category: camera
+        entity_id: camera.walkway
+- id: walkway_motion_floodlights
+  alias: Walkway Motion Floodlights
+  trigger:
+    platform: state
+    entity_id: sensor.walkway_motion_detected
+    from: 'False'
+    to: 'True'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.switch_6
+  - delay: 120
+  - service: switch.turn_off
+    entity_id: switch.switch_6
+- id: barn_lights_on
+  alias: Barn Lights On 30 Minutes before Sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: -00:30:00
+  action:
+    service: scene.turn_on
+    entity_id: scene.barnlights_on
+- id: barn_lights_off
+  alias: Barn Lights Off 30 Minutes after Sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: +00:30:00
+  action:
+    service: scene.turn_on
+    entity_id: scene.barnlights_off
+- id: bedroom_hallway_on_for_liberty
+  alias: Bedroom Hallway On at 7:10AM
+  trigger:
+  - at: 07:20:00
+    platform: time
+  action:
+  - data:
+      brightness: 30
+    entity_id: light.bedroom_hallway
+    service: light.turn_on
+- id: laundry_closet_light_on
+  alias: Laundry Closet Light On With Motion
+  trigger:
+    platform: state
+    entity_id: binary_sensor.laundry_closet_motion
+    to: 'on'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.laundry
+- id: laundry_closet_light_off
+  alias: Laundry Closet Light Off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.laundry_closet_motion
+    to: 'off'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.laundry
+- id: laundry_closet_fan_off
+  alias: Laundry Fan Off After 2 Hours
+  trigger:
+    platform: state
+    entity_id: switch.laundry_fan
+    to: 'on'
+    for:
+      minutes: 120
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.laundry_fan
 
-  - alias: 'Walkway Motion Floodlights'
-    trigger:
-      platform: state
-      entity_id: sensor.walkway_motion_detected
-      from: 'False'
-      to: 'True'
-    action:
-      - service: switch.turn_on
-        entity_id: "switch.switch_6"
-      - delay: 2:00
-      - service: switch.turn_off
-        entity_id: "switch.switch_6"
+- id: announce_bedroom_hallway_unlocked
+  alias: Announce Bedroom Hallway Unlocked
+  trigger:
+  - entity_id: lock.bedroom_hallway
+    platform: state
+    to: unlocked
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.master_bedroom_speaker
+      volume_level: '0.4'
+  - service: tts.google_say
+    entity_id: media_player.master_bedroom_speaker
+    data:
+      message: 'Bedroom Hallway has been unlocked.'
 
-  - alias: "Barn Lights On 30 Minutes before Sunset"
-    trigger:
-      platform: sun
-      event: sunset
-      offset: "-00:30:00"
-    action:
-      service: scene.turn_on
-      entity_id: scene.barnlights_on
-
-
-  - alias: "Barn Lights Off 30 Minutes after Sunrise"
-    trigger:
-      platform: sun
-      event: sunrise
-      offset: "+00:30:00"
-    action:
-      service: scene.turn_on
-      entity_id: scene.barnlights_off
-
-  - alias: "Bedroom Hallway On at 7AM"
-    trigger:
-      platform: time
-      at: '07:00:00'
-    action:
-        service: switch.turn_on
-        entity_id: light.bedroom_hallway
-
-  - alias: "Laundry Closet Light On With Motion"
-    trigger:
-      platform: state
-      entity_id: binary_sensor.laundry_closet_motion
-      to: 'on'
-    action:
-    - service: switch.turn_on
-      entity_id: "switch.laundry"
-
-  - alias: "Laundry Closet Light Off"
-    trigger:
-      platform: state
-      entity_id: binary_sensor.laundry_closet_motion
-      to: 'off'
-    action:
-    - service: switch.turn_off
-      entity_id: "switch.laundry"
-
+- id: announce_front_door_unlocked
+  alias: Announce Front Door Unlocked
+  trigger:
+    platform: state
+    entity_id: lock.front_door
+    to: unlocked
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.master_bedroom_speaker
+      volume_level: '0.4'
+  - service: tts.google_say
+    entity_id: media_player.master_bedroom_speaker
+    data:
+      message: Front Door has been unlocked.
+- id: announce_garage_foyer_door_unlocked
+  alias: Announce Garage Foyer Unlocked
+  trigger:
+    platform: state
+    entity_id: lock.garage_foyer_door
+    to: unlocked
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.master_bedroom_speaker
+      volume_level: '0.4'
+  - service: tts.google_say
+    entity_id: media_player.master_bedroom_speaker
+    data:
+      message: Garage Foyer Door has been unlocked.

@@ -2,40 +2,100 @@
     view: yes
     icon: mdi:home
     entities:
-      - group.all_automations
       - group.dogpoop
+      - group.foyer
       - group.walkway
       - group.living_room
       - group.kitchen
       - group.liberty
+      - group.guest_bedroom
       - group.floods
       - group.garage
       - group.barnlights
       - group.sirens
       - group.master_bedroom
+      - group.master_bathroom
       - group.office
       - group.laundry
+      - group.hallway
       - group.mechanical_room
+      
 
   security:
     view: yes
     icon: mdi:lock
     entities:
       - group.security_status
+      - group.all_locks
+
+  scenes:
+    view: yes
+    entities:
+      - scene.barnlights_on
+      - scene.barnlights_off
+      - scene.morning
+      - scene.winter_afternoon
 
   auto:
     view: yes
     entities:
       - group.automations
 
+  battery:
+    name: BATT
+    view: yes
+    entities:
+      - group.batteries
+
+  all:
+    view: yes
+    entities:
+      - group.all_locks
+      - group.all_switches
+      - group.all_lights
+      - group.all_devices
+      - group.all_scripts
+      - group.all_automations
+      
+  batteries:
+    name: Batteries
+    entities:
+      - sensor.garage_battery
+      - sensor.laundry_closet_battery
+      - sensor.mechanical_room_battery
+      - sensor.office_battery
+      - sensor.master_bedroom_battery
+
+  foyer:
+    name: Foyer
+    entities:
+      - light.bar_cart
+      - light.foyer_pendant
+      - light.stairway_sconces
+
+  hallway:
+    name: Hallways
+    entities:
+      - light.bedroom_hallway
+      - light.guest_hallway
+
+  guest_bedroom:
+    name: Guest Bedroom
+    entities:
+      - light.guest_bedroom
+
   automations:
     name: Automations
     entities:
+      - automation.announce_bedroom_hallway_unlocked
+      - automation.announce_front_door_unlocked
+      - automation.announce_garage_foyer_unlocked
       - automation.barn_lights_off_30_minutes_after_sunrise
-      - automation.barn_lights_on_30_minutes_after_sunset
-      - automation.bedroom_hallway_on_at_7am
+      - automation.barn_lights_on_30_minutes_before_sunset
+      - automation.bedroom_hallway_on_at_710am
       - automation.laundry_closet_light_off
       - automation.laundry_closet_light_on_with_motion
+      - automation.laundry_fan_off_after_2_hours
       - automation.walkway_motion_floodlights
       - automation.walkway_motion_notify
 
@@ -56,6 +116,7 @@
     entities:
       - switch.liberty_closet
       - light.liberty_bedroom
+      - switch.liberty_christmas_tree_3
       - camera.liberty
 
   laundry:
@@ -110,6 +171,8 @@
       - light.kitchen_cans
       - light.kitchen_island
       - light.kitchen_nook_cans
+      - light.dining_room_cans
+      - light.seasonal_shelf
 
   living_room:
     name: Living Room
@@ -125,7 +188,16 @@
       - switch.master_closet_right
       - binary_sensor.master_bedroom_motion
       - sensor.master_bedroom_temperature
-      
+
+  master_bathroom:
+    name: Master Bathroom
+    entities:
+      - light.master_bath_sconces
+      - light.master_bath_shower
+      - light.master_bath_toilet
+      - switch.master_bath_fan
+      - switch.master_toilet_fan
+
   office:
     name: Office
     entities:
