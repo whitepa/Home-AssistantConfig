@@ -5,6 +5,7 @@
       - group.dogpoop
       - group.foyer
       - group.walkway
+      - group.backyard
       - group.living_room
       - group.kitchen
       - group.liberty
@@ -92,7 +93,7 @@
       - automation.announce_garage_foyer_unlocked
       - automation.barn_lights_off_30_minutes_after_sunrise
       - automation.barn_lights_on_30_minutes_before_sunset
-      - automation.bedroom_hallway_on_at_710am
+      - automation.bedroom_hallway_on_for_liberty
       - automation.laundry_closet_light_off
       - automation.laundry_closet_light_on_with_motion
       - automation.laundry_fan_off_after_2_hours
@@ -212,4 +213,13 @@
       - switch.walkway_barnlights
       - sensor.walkway_motion_detected
       - camera.walkway
+
+  backyard:
+    name: Backyard
+    entities:
+      - switch.backyard_barnlights
+      - switch.flood_backyard
+      - sensor.backyard_motion_detected
+      - camera.backyard
+
 

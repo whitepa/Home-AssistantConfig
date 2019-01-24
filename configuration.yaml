@@ -302,6 +302,12 @@ amcrest:
     password: !secret amcrest_walkway_password
     sensors:
       - motion_detector
+  - host: 10.0.1.208
+    name: backyard
+    username: !secret amcrest_backyard_username
+    password: !secret amcrest_backyard_password
+    sensors:
+      - motion_detector
 
 camera:
 #  - platform: ffmpeg

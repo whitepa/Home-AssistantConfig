@@ -54,7 +54,7 @@
     service: scene.turn_on
     entity_id: scene.barnlights_off
 - id: bedroom_hallway_on_for_liberty
-  alias: Bedroom Hallway On at 7:10AM
+  alias: Bedroom Hallway On For Liberty
   trigger:
   - at: 07:20:00
     platform: time
