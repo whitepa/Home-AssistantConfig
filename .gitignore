@@ -2,5 +2,7 @@
 !*.yaml
 !scenes
 !.gitignore
+deps
+tts
 secrets.yaml
 known_devices.yaml
