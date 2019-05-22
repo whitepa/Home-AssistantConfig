@@ -19,9 +19,10 @@ zone:
     longitude: !secret longitude
     radius: 300
 
-recorder:
-  purge_keep_days: 14
-  db_url: mysql://hassuser:hass@localhost/hass_db?charset=utf8
+# TODO uncomment
+#recorder:
+#  purge_keep_days: 14
+#  db_url: mysql://hassuser:hass@localhost/hass_db?charset=utf8
 
 logger:
   default: info
@@ -51,9 +52,6 @@ hue:
   bridges:
     - host: 10.0.1.2
 
-# Show links to resources in log and frontend
-introduction:
-
 # Enables the frontend
 frontend:
 
@@ -62,10 +60,10 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  api_password: !secret http_password
+  # api_password:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  ssl_certificate: !secret ssl_certificate
-  ssl_key: !secret ssl_key
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
   base_url: !secret base_url
 
 # Checks for available updates
