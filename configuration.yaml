@@ -282,6 +282,8 @@ zwave:
 ffmpeg:
   ffmpeg_bin: /usr/local/bin/ffmpeg
 
+stream:
+
 amcrest:
   - host: 10.0.1.203
     name: driveway
