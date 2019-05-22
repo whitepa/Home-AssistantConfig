@@ -291,12 +291,6 @@ amcrest:
     password: !secret amcrest_driveway_password
     sensors:
       - motion_detector
-  - host: 10.0.1.206
-    name: liberty
-    username: !secret amcrest_liberty_username
-    password: !secret amcrest_liberty_password
-    sensors:
-      - motion_detector
   - host: 10.0.1.207
     name: walkway
     username: !secret amcrest_walkway_username
@@ -315,18 +309,18 @@ camera:
 #    input: rtsp://admin:acrules76@10.0.1.207:554/cam/realmonitor?channel=1&subtype=1
 #    name: Walkway2
 
-cover:
-  - platform: myq
-    username: !secret myq_username
-    password: !secret myq_password
-    type: liftmaster
+#cover:
+#  - platform: myq
+#    username: !secret myq_username
+#    password: !secret myq_password
+#    type: liftmaster
 
-climate:
-  - platform: honeywell
-    region: us
-    username: !secret honeywell_username 
-    password: !secret honeywell_password
-    scan_interval: 1200
+#climate:
+#  - platform: honeywell
+#    region: us
+#    username: !secret honeywell_username 
+#    password: !secret honeywell_password
+#    scan_interval: 1200
 
 mqtt:
   broker: localhost
