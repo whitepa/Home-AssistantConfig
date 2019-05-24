@@ -60,7 +60,7 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password:
+  # api_password: liberty
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
@@ -262,14 +262,14 @@ sensor:
   - platform: yr
 
 # Cert monitor:
-  - platform: command_line
-    name: SSL Cert Expiry
-    unit_of_measurement: days
-    scan_interval: 10800
-    command: !secret cert_check_command
+#  - platform: command_line
+#    name: SSL Cert Expiry
+#    unit_of_measurement: days
+#    scan_interval: 10800
+#    command: !secret cert_check_command
 
-shell_command:
-  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+#shell_command:
+#  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -287,20 +287,20 @@ stream:
 amcrest:
   - host: 10.0.1.203
     name: driveway
-    username: !secret amcrest_driveway_username
-    password: !secret amcrest_driveway_password
+    username: !secret amcrest_username
+    password: !secret amcrest_password
     sensors:
       - motion_detector
   - host: 10.0.1.207
     name: walkway
-    username: !secret amcrest_walkway_username
-    password: !secret amcrest_walkway_password
+    username: !secret amcrest_username
+    password: !secret amcrest_password
     sensors:
       - motion_detector
   - host: 10.0.1.208
     name: backyard
-    username: !secret amcrest_backyard_username
-    password: !secret amcrest_backyard_password
+    username: !secret amcrest_username
+    password: !secret amcrest_password
     sensors:
       - motion_detector
 
