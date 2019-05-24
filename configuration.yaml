@@ -55,6 +55,9 @@ hue:
 # Enables the frontend
 frontend:
 
+lovelace:
+  mode: yaml
+
 # Enables configuration UI
 config:
 
@@ -286,7 +289,13 @@ stream:
 
 amcrest:
   - host: 10.0.1.203
-    name: driveway
+    name: livingroom
+    username: !secret amcrest_username
+    password: !secret amcrest_password
+    sensors:
+      - motion_detector
+  - host: 10.0.1.205
+    name: garage
     username: !secret amcrest_username
     password: !secret amcrest_password
     sensors:
@@ -299,6 +308,12 @@ amcrest:
       - motion_detector
   - host: 10.0.1.208
     name: backyard
+    username: !secret amcrest_username
+    password: !secret amcrest_password
+    sensors:
+      - motion_detector
+  - host: 10.0.1.210
+    name: driveway
     username: !secret amcrest_username
     password: !secret amcrest_password
     sensors:

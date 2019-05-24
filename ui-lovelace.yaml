@@ -1,0 +1,218 @@
+title: Home
+views:
+  - path: default_view
+    title: default_view
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - switch.flood_upslope
+          - switch.flood_garage
+        title: Dog Poop
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.bar_cart
+          - light.foyer_pendant
+          - light.stairway_sconces
+        title: Foyer
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - switch.walkway_barnlights
+          - sensor.walkway_motion_detected
+        title: Walkway
+        show_header_toggle: true
+      - type: picture-entity
+        entity: camera.walkway
+        camera_view: live
+      - type: entities
+        entities:
+          - switch.backyard_barnlights
+          - switch.flood_backyard
+          - sensor.backyard_motion_detected
+        title: Backyard
+        show_header_toggle: true
+      - type: picture-entity
+        entity: camera.backyard
+        camera_view: live
+      - type: entities
+        entities:
+          - light.living_room_pendant
+          - light.living_room_cans
+        title: Living Room
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.kitchen_cans
+          - light.kitchen_island
+          - light.kitchen_nook_cans
+          - light.dining_room_cans
+          - light.seasonal_shelf
+        title: Kitchen
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - switch.liberty_closet
+          - light.liberty_bedroom
+          - switch.liberty_christmas_tree_3
+        title: Liberty
+        show_header_toggle: true
+      - type: picture-entity
+        entity: camera.liberty
+      - type: entities
+        entities:
+          - light.guest_bedroom
+        title: Guest Bedroom
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - switch.flood_upslope
+          - switch.flood_downslope
+          - switch.flood_garage
+          - switch.flood_backyard
+        title: Floodlights
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - switch.garage_ne
+          - switch.garage_nw
+          - switch.garage_se
+          - switch.garage_sw
+          - binary_sensor.garage_motion
+          - sensor.garage_temperature
+        title: Garage
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - switch.backyard_barnlights
+          - switch.garage_barnlights
+          - switch.walkway_barnlights
+        title: Barn Lights
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.siren_foyer
+          - light.siren_garage
+        title: Sirens
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.master_bedroom_pendant
+          - light.master_closet_left
+          - switch.master_closet_right
+          - binary_sensor.master_bedroom_motion
+          - sensor.master_bedroom_temperature
+        title: Master Bedroom
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.master_bath_sconces
+          - light.master_bath_shower
+          - light.master_bath_toilet
+          - switch.master_bath_fan
+          - switch.master_toilet_fan
+        title: Master Bathroom
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.office
+          - binary_sensor.office_motion
+          - sensor.office_temperature
+        title: Office
+        show_header_toggle: true
+      - type: picture-entity
+        entity: camera.driveway
+      - type: entities
+        entities:
+          - switch.laundry
+          - switch.laundry_fan
+          - sensor.laundry_closet_temperature
+          - binary_sensor.laundry_closet_motion
+        title: Laundry
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - light.bedroom_hallway
+          - light.guest_hallway
+        title: Hallways
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - sensor.mechanical_room_temperature
+          - binary_sensor.mechanical_room_motion
+        title: Mechanical Room
+        show_header_toggle: true
+    icon: 'mdi:home'
+  - path: security
+    title: security
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - sensor.secure_house
+          - sensor.secure_office
+        title: Status
+        show_header_toggle: true
+    icon: 'mdi:lock'
+  - path: scenes
+    title: scenes
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - scene.barnlights_on
+          - scene.barnlights_off
+        title: Scene
+  - path: auto
+    title: auto
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - automation.announce_bedroom_hallway_unlocked
+          - automation.announce_front_door_unlocked
+          - automation.announce_garage_foyer_unlocked
+          - automation.barn_lights_off_30_minutes_after_sunrise
+          - automation.barn_lights_on_30_minutes_before_sunset
+          - automation.bedroom_hallway_on_for_liberty
+          - automation.laundry_closet_light_off
+          - automation.laundry_closet_light_on_with_motion
+          - automation.laundry_fan_off_after_2_hours
+          - automation.walkway_motion_floodlights
+          - automation.walkway_motion_notify
+        title: Automations
+        show_header_toggle: true
+  - path: battery
+    title: BATT
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - sensor.garage_battery
+          - sensor.laundry_closet_battery
+          - sensor.mechanical_room_battery
+          - sensor.office_battery
+          - sensor.master_bedroom_battery
+        title: Batteries
+        show_header_toggle: true
+  - path: all
+    title: all
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - automation.announce_bedroom_hallway_unlocked
+          - automation.announce_front_door_unlocked
+          - automation.announce_garage_foyer_unlocked
+          - automation.auto_renew_ssl_cert
+          - automation.barn_lights_off_30_minutes_after_sunrise
+          - automation.barn_lights_on_30_minutes_before_sunset
+          - automation.bedroom_hallway_on_for_liberty
+          - automation.laundry_closet_light_off
+          - automation.laundry_closet_light_on_with_motion
+          - automation.laundry_fan_off_after_2_hours
+          - automation.walkway_motion_floodlights
+          - automation.walkway_motion_notify
+        title: all automations
+        show_header_toggle: true
